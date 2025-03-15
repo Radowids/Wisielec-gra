@@ -10,7 +10,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         boolean isntPasswordGuessed = true;
         int counter = 0;
-        int repeteCounter = 0;
+        int repeateCounter = 10;
         HashSet<Character> usedLetters = new HashSet<>();
 
         PasswordCreator passwordCreator = new PasswordCreator();
@@ -40,15 +40,26 @@ public class Main {
                 }
                 usedLetters.add(letter);
             }
-            for (char c : password) {
-                if (letter == c) {
-                    repeteCounter--;
+
+            for (char character : password) {
+                if (letter == character) {
+                    repeateCounter--;
                 }
             }
-            if (repeteCounter > 0){
+
+            int notGuessedCharactersCounter = 0;
+            for (char character : letterToPassword){
+                if (character != '-'){
+                    notGuessedCharactersCounter++;
+                }
+            }
+            if (notGuessedCharactersCounter == password.length){
+                break;
+            }
+
+            if (repeateCounter >= 0){
                 counter++;
             }
-            repeteCounter = 1;
 
             System.out.println("Pozostało " + (10 - counter) + " prób!");
             System.out.println("Użyte litery: " + usedLetters);
